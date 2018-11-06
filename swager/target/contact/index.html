@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>宠物商城后台管理系统</title>
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link href="css/base.css" rel="stylesheet" type="text/css">
+    <link href="css/login.css" rel="stylesheet" type="text/css">
+</head>
+<style>
+    .top{
+        color: white;
+        font-size: 50px;
+        text-align: center;
+        padding-bottom: 40px;
+    }
+</style>
+<body>
+<div class="login">
+    <form >
+        <div class="top">
+            <label>宠物商城后台管理系统</label>
+        </div>
+        <div class="login_form">
+            <div class="user">
+                <input class="text_value" name="username" type="text" value="">
+                <input class="text_value" name="password" type="password" value="">
+            </div>
+            <button class="button" id="submit" type="button">登录</button>
+        </div>
+
+        <div id="tip"></div>
+        <div class="foot">
+            My name is WBG. We are destined for @2018.
+        </div>
+    </form>
+</div>
+<script src="js/jquery.min.js"></script>
+<script>
+    $("#submit").click(function () {
+
+        $.ajax({
+            type:"post",
+            url:"/user/login",
+            dataType: 'json'
+            ,data:{username:$("input[name=username]").val(),password:$("input[name=password]").val()}
+            , success: function (data) {
+                console.log(data);
+                if(data.code==200){
+                    alert(data.msg);
+                    window.location.href="/qj/index"
+                }else {
+                    alert(data.msg);
+                    $("input[name=password]").val("");
+                }
+            }
+        })
+    })
+</script>
+</body>
+</html>
